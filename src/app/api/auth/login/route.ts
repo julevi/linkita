@@ -3,6 +3,8 @@ import pool from '@/lib/db'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { z } from 'zod'
+import { ratelimit } from '@/lib/ratelimit'
+import { headers } from 'next/headers'
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email'),
@@ -11,6 +13,18 @@ const loginSchema = z.object({
 
 export async function POST(request: Request) {
   try {
+    // Rate limiting
+    const headersList = await headers()
+    const ip = headersList.get('x-forwarded-for') ?? 'anonymous'
+    const { success } = await ratelimit.limit(ip)
+
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Too many attempts. Try again in 15 minutes.' },
+        { status: 429 }
+      )
+    }
+
     const body = await request.json()
     const validation = loginSchema.safeParse(body)
 
@@ -28,7 +42,6 @@ export async function POST(request: Request) {
       [email]
     )
 
-    // Mensagem genérica pra não revelar se o email existe ou não
     if (result.rows.length === 0) {
       return NextResponse.json(
         { error: 'Invalid email or password' },
