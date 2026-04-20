@@ -146,7 +146,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-zinc-50">
       {/* Header */}
       <header className="bg-white border-b px-8 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-bold">linkita</h1>
+        <a href="/" className="text-xl font-bold hover:opacity-70 transition-opacity">linkita</a>
         <button
           onClick={handleLogout}
           className="text-sm text-muted-foreground hover:text-black transition-colors"

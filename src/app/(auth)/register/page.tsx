@@ -61,7 +61,7 @@ export default function RegisterPage() {
       {/* Left side - Form */}
       <div className="flex flex-col justify-center px-16">
         <div className="mb-10">
-          <h1 className="text-3xl font-bold">linkita</h1>
+          <a href="/" className="text-xl font-bold hover:opacity-70 transition-opacity">linkita</a>
         </div>
 
         <h2 className="text-2xl font-semibold mb-1">Create your account</h2>

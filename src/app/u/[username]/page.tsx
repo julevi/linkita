@@ -78,7 +78,8 @@ export default async function ProfilePage({ params }: Props) {
 
       {/* Footer */}
       <p className="mt-12 text-xs text-muted-foreground">
-        made with <span className="font-semibold">linkita</span>
+        made with <span className="font-semibold">
+          <a href="/" > linkita</a>  </span>
       </p>
     </div>
   )
