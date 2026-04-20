@@ -20,6 +20,25 @@ export default function RegisterPage() {
     setLoading(true)
     setError('')
 
+    // Validação básica no frontend
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters')
+      setLoading(false)
+      return
+    }
+
+    if (username.length < 3) {
+      setError('Username must be at least 3 characters')
+      setLoading(false)
+      return
+    }
+
+    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+      setError('Username can only contain letters, numbers and underscores')
+      setLoading(false)
+      return
+    }
+
     const res = await fetch('/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -54,7 +73,7 @@ export default function RegisterPage() {
             <Input
               id="name"
               type="text"
-              placeholder="name"
+              placeholder="Juliana Prado"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -78,11 +97,14 @@ export default function RegisterPage() {
             <Input
               id="username"
               type="text"
-              placeholder="username"
+              placeholder="juliana"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value.toLowerCase())}
               required
             />
+            <p className="text-xs text-muted-foreground">
+              Letters, numbers and underscores only. Min. 3 characters.
+            </p>
           </div>
 
           <div className="space-y-2">
@@ -95,6 +117,9 @@ export default function RegisterPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <p className="text-xs text-muted-foreground">
+              Min. 8 characters.
+            </p>
           </div>
 
           {error && (
