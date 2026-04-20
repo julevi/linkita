@@ -73,7 +73,7 @@ export default function RegisterPage() {
             <Input
               id="name"
               type="text"
-              placeholder="Juliana Prado"
+              placeholder="your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -97,7 +97,7 @@ export default function RegisterPage() {
             <Input
               id="username"
               type="text"
-              placeholder="juliana"
+              placeholder="your username"
               value={username}
               onChange={(e) => setUsername(e.target.value.toLowerCase())}
               required
