@@ -36,9 +36,9 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen grid grid-cols-2">
+  <div className="min-h-screen md:grid grid-cols-2">
       {/* Left side - Form */}
-      <div className="flex flex-col justify-center px-16">
+      <div className="flex flex-col justify-center px-8 md:px-16 w-full min-h-screen">
         <div className="mb-10">
           <a href="/" className="text-xl font-bold hover:opacity-70 transition-opacity">linkita</a>
         </div>
@@ -89,9 +89,9 @@ export default function LoginPage() {
       </div>
 
       {/* Right side - Visual */}
-      <div className="bg-zinc-900 flex items-center justify-center">
-        <p className="text-white text-4xl font-bold tracking-tight">linkita.</p>
-      </div>
+    <div className="hidden md:flex bg-zinc-900 items-center justify-center">
+      <p className="text-white text-4xl font-bold tracking-tight">linkita.</p>
+    </div>
     </div>
   )
 }
