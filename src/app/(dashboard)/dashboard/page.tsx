@@ -161,6 +161,15 @@ export default function DashboardPage() {
     setTimeout(() => setProfileSaved(false), 2000)
   }
 
+  async function handleLanguageChange(locale: string) {
+    await fetch('/api/language', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ locale })
+    })
+    window.location.reload()
+  }
+
   function AnalyticsTab() {
     const [analytics, setAnalytics] = useState<{
       total: number
@@ -360,7 +369,7 @@ export default function DashboardPage() {
                     onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
                   />
                 </div>
-                
+
                 <div className="flex flex-col justify-end">
                   <Button type="submit" disabled={savingProfile}>
                     {savingProfile ? 'Saving...' : 'Save'}
@@ -472,6 +481,26 @@ export default function DashboardPage() {
 
         {activeTab === 'settings' && (
           <div className="space-y-6">
+            {/* Language */}
+            <div className="bg-white rounded-xl border p-6">
+              <h2 className="text-sm font-semibold mb-4">Language</h2>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => handleLanguageChange('en')}
+                  className="px-4 py-2 rounded-lg border text-sm font-medium transition-colors hover:bg-zinc-50"
+                >
+                  🇺🇸 English
+                </button>
+                <button
+                  onClick={() => handleLanguageChange('pt')}
+                  className="px-4 py-2 rounded-lg border text-sm font-medium transition-colors hover:bg-zinc-50"
+                >
+                  🇧🇷 Português
+                </button>
+              </div>
+            </div>
+
+            {/* Account settings */}
             <div className="bg-white rounded-xl border p-6">
               <h2 className="text-sm font-semibold mb-4">Account settings</h2>
               <form

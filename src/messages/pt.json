@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "login": "Entrar",
+    "getStarted": "Começar"
+  },
+  "hero": {
+    "tag": "Um link para tudo",
+    "title": "Compartilhe todos os seus links em um só lugar",
+    "description": "Crie sua página personalizada e compartilhe seus links, redes sociais e muito mais — tudo em uma única URL.",
+    "cta": "Criar seu linkita",
+    "login": "Já tem uma conta →"
+  },
+  "footer": {
+    "madeWith": "feito com ♥ por"
+  },
+  "login": {
+    "title": "Bem-vindo de volta",
+    "subtitle": "Entre na sua conta",
+    "email": "E-mail",
+    "password": "Senha",
+    "submit": "Entrar",
+    "loading": "Entrando...",
+    "noAccount": "Não tem uma conta?",
+    "signUp": "Cadastre-se"
+  },
+  "register": {
+    "title": "Crie sua conta",
+    "subtitle": "Comece a compartilhar seus links hoje",
+    "name": "Nome",
+    "email": "E-mail",
+    "username": "Nome de usuário",
+    "usernameHint": "Apenas letras, números e underscores. Mín. 3 caracteres.",
+    "password": "Senha",
+    "passwordHint": "Mín. 8 caracteres.",
+    "submit": "Criar conta",
+    "loading": "Criando conta...",
+    "hasAccount": "Já tem uma conta?",
+    "login": "Entrar"
+  },
+  "dashboard": {
+    "logout": "Sair",
+    "tabs": {
+      "links": "Links",
+      "appearance": "Aparência",
+      "analytics": "Análises",
+      "settings": "Configurações"
+    },
+    "links": {
+      "addTitle": "Adicionar novo link",
+      "titleLabel": "Título",
+      "urlLabel": "URL",
+      "addButton": "Adicionar link",
+      "adding": "Adicionando...",
+      "noLinks": "Nenhum link ainda. Adicione o primeiro!",
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "appearance": {
+      "profile": "Perfil",
+      "name": "Nome",
+      "bio": "Bio",
+      "photo": "Foto de perfil",
+      "upload": "Enviar foto",
+      "uploading": "Enviando...",
+      "remove": "Remover foto",
+      "save": "Salvar",
+      "saving": "Salvando...",
+      "saved": "Salvo!",
+      "theme": "Tema da página",
+      "preview": "Prévia"
+    },
+    "analytics": {
+      "title": "Visualizações da página",
+      "today": "Hoje",
+      "last7": "Últimos 7 dias",
+      "allTime": "Total"
+    },
+    "settings": {
+      "title": "Configurações da conta",
+      "email": "E-mail",
+      "currentPassword": "Senha atual",
+      "newPassword": "Nova senha",
+      "optional": "(opcional)",
+      "save": "Salvar configurações"
+    }
+  }
+}

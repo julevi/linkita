@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "login": "Log in",
+    "getStarted": "Get started"
+  },
+  "hero": {
+    "tag": "One link for everything",
+    "title": "Share all your links in one place",
+    "description": "Create your personalized page and share your links, social media, and more — all in one URL.",
+    "cta": "Create your linkita",
+    "login": "Already have an account →"
+  },
+  "footer": {
+    "madeWith": "made with ♥ by"
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Log in to your account",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log in",
+    "loading": "Logging in...",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up"
+  },
+  "register": {
+    "title": "Create your account",
+    "subtitle": "Start sharing your links today",
+    "name": "Name",
+    "email": "Email",
+    "username": "Username",
+    "usernameHint": "Letters, numbers and underscores only. Min. 3 characters.",
+    "password": "Password",
+    "passwordHint": "Min. 8 characters.",
+    "submit": "Create account",
+    "loading": "Creating account...",
+    "hasAccount": "Already have an account?",
+    "login": "Log in"
+  },
+  "dashboard": {
+    "logout": "Log out",
+    "tabs": {
+      "links": "Links",
+      "appearance": "Appearance",
+      "analytics": "Analytics",
+      "settings": "Settings"
+    },
+    "links": {
+      "addTitle": "Add new link",
+      "titleLabel": "Title",
+      "urlLabel": "URL",
+      "addButton": "Add link",
+      "adding": "Adding...",
+      "noLinks": "No links yet. Add your first one!",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "appearance": {
+      "profile": "Profile",
+      "name": "Name",
+      "bio": "Bio",
+      "photo": "Profile photo",
+      "upload": "Upload photo",
+      "uploading": "Uploading...",
+      "remove": "Remove photo",
+      "save": "Save",
+      "saving": "Saving...",
+      "saved": "Saved!",
+      "theme": "Page theme",
+      "preview": "Preview"
+    },
+    "analytics": {
+      "title": "Page views",
+      "today": "Today",
+      "last7": "Last 7 days",
+      "allTime": "All time"
+    },
+    "settings": {
+      "title": "Account settings",
+      "email": "Email",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "optional": "(optional)",
+      "save": "Save settings"
+    }
+  }
+}
