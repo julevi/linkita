@@ -36,6 +36,8 @@ export default function DashboardPage() {
 
   const [selectedTheme, setSelectedTheme] = useState<ThemeKey>('default')
 
+  const [uploadingPhoto, setUploadingPhoto] = useState(false)
+
   useEffect(() => {
     fetchLinks()
     fetchProfile()
@@ -98,6 +100,36 @@ export default function DashboardPage() {
       setProfile(data.profile)
       setSelectedTheme(data.profile.theme ?? 'default')
     }
+  }
+
+  async function handlePhotoUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setUploadingPhoto(true)
+
+    const formData = new FormData()
+    formData.append('file', file)
+
+    const res = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData
+    })
+
+    const data = await res.json()
+
+    if (res.ok) {
+      const updatedProfile = { ...profile, avatar_url: data.url }
+      setProfile(updatedProfile)
+
+      await fetch('/api/profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedProfile)
+      })
+    }
+
+    setUploadingPhoto(false)
   }
 
   async function handleThemeChange(theme: ThemeKey) {
@@ -203,7 +235,7 @@ export default function DashboardPage() {
                   <Label htmlFor="title">Title</Label>
                   <Input
                     id="title"
-                    placeholder="My Portfolio"
+                    placeholder="link title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
@@ -271,6 +303,45 @@ export default function DashboardPage() {
               <h2 className="text-sm font-semibold mb-4">Profile</h2>
               <form onSubmit={handleSaveProfile} className="space-y-4">
                 <div className="space-y-1">
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="w-16 h-16 rounded-full bg-zinc-100 flex items-center justify-center overflow-hidden">
+                      {profile.avatar_url ? (
+                        <img
+                          src={profile.avatar_url}
+                          alt={profile.name}
+                          className="w-16 h-16 rounded-full object-cover"
+                        />
+                      ) : (
+                        <span className="text-xl font-bold text-zinc-500">
+                          {profile.name?.[0]?.toUpperCase() ?? '?'}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex gap-2">
+                      <label className="cursor-pointer inline-flex items-center justify-center text-xs bg-black text-white px-3 py-2 rounded-lg hover:bg-zinc-800 transition-colors">
+                        {uploadingPhoto ? 'Uploading...' : 'Upload photo'}
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={handlePhotoUpload}
+                          disabled={uploadingPhoto}
+                        />
+                      </label>
+                      {profile.avatar_url && (
+                        <button
+                          onClick={() => setProfile({ ...profile, avatar_url: '' })}
+                          className="text-xs  text-black px-3 py-2 rounded-lg hover:bg-zinc-100 transition-colors"
+                        >
+                          Remove photo
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
                   <Label htmlFor="name">Name</Label>
                   <Input
                     id="name"
@@ -289,23 +360,13 @@ export default function DashboardPage() {
                     onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
                   />
                 </div>
-
-                <div className="space-y-1">
-                  <Label htmlFor="avatar_url">Avatar URL</Label>
-                  <Input
-                    id="avatar_url"
-                    placeholder="https://..."
-                    value={profile.avatar_url || ''}
-                    onChange={(e) => setProfile({ ...profile, avatar_url: e.target.value })}
-                  />
-                </div>
-
-                <div className="flex items-center gap-3">
+                
+                <div className="flex flex-col justify-end">
                   <Button type="submit" disabled={savingProfile}>
                     {savingProfile ? 'Saving...' : 'Save'}
                   </Button>
                   {profileSaved && (
-                    <p className="text-sm text-green-500">Saved!</p>
+                    <p className="text-sm py-2 text-green-500">Saved!</p>
                   )}
                 </div>
               </form>
@@ -314,7 +375,7 @@ export default function DashboardPage() {
             {/* Theme Selector */}
             <div className="bg-white rounded-xl border p-6">
               <h2 className="text-sm font-semibold mb-4">Page theme</h2>
-              <div className="grid grid-cols-5 gap-3">
+              <div className="grid sm:grid-cols-5 gap-3">
                 {(Object.keys(themes) as ThemeKey[]).map((key) => (
                   <button
                     key={key}
