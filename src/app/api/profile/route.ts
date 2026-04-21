@@ -34,11 +34,11 @@ export async function PUT(request: Request) {
   const user = await getUserFromToken()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const { name, bio, avatar_url } = await request.json()
+  const { name, bio, avatar_url, theme } = await request.json()
 
   const result = await pool.query(
-    'UPDATE profiles SET name = $1, bio = $2, avatar_url = $3 WHERE user_id = $4 RETURNING *',
-    [name, bio, avatar_url, user.id]
+    'UPDATE profiles SET name = $1, bio = $2, avatar_url = $3, theme = $4 WHERE user_id = $5 RETURNING *',
+    [name, bio, avatar_url, theme, user.id]
   )
 
   return NextResponse.json({ profile: result.rows[0] })

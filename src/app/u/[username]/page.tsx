@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import pool from '@/lib/db'
+import { themes, ThemeKey } from '@/lib/themes'
 
 interface Props {
   params: Promise<{ username: string }>
@@ -8,9 +9,8 @@ interface Props {
 export default async function ProfilePage({ params }: Props) {
   const { username } = await params
 
-  // Busca o usuário
   const userResult = await pool.query(
-    'SELECT users.id, users.username, profiles.name, profiles.bio, profiles.avatar_url FROM users JOIN profiles ON users.id = profiles.user_id WHERE users.username = $1',
+    'SELECT users.id, users.username, profiles.name, profiles.bio, profiles.avatar_url, profiles.theme FROM users JOIN profiles ON users.id = profiles.user_id WHERE users.username = $1',
     [username]
   )
 
@@ -20,25 +20,24 @@ export default async function ProfilePage({ params }: Props) {
 
   const profile = userResult.rows[0]
 
-  // Registra visualização
   await pool.query(
     'INSERT INTO page_views (user_id) VALUES ($1)',
     [profile.id]
   )
 
-  // Busca os links ativos
   const linksResult = await pool.query(
     'SELECT * FROM links WHERE user_id = $1 AND is_active = true ORDER BY position ASC',
     [profile.id]
   )
 
   const links = linksResult.rows
+  const theme = themes[(profile.theme as ThemeKey) ?? 'default'] ?? themes.default
 
   return (
-    <div className="min-h-screen bg-zinc-50 flex flex-col items-center py-16 px-4">
+    <div className={`min-h-screen ${theme.bg} flex flex-col items-center py-16 px-4`}>
       {/* Profile */}
       <div className="flex flex-col items-center mb-8">
-        <div className="w-20 h-20 rounded-full bg-zinc-200 flex items-center justify-center mb-4">
+        <div className={`w-20 h-20 rounded-full ${theme.avatar} flex items-center justify-center mb-4`}>
           {profile.avatar_url ? (
             <img
               src={profile.avatar_url}
@@ -46,21 +45,21 @@ export default async function ProfilePage({ params }: Props) {
               className="w-20 h-20 rounded-full object-cover"
             />
           ) : (
-            <span className="text-2xl font-bold text-zinc-500">
+            <span className={`text-2xl font-bold ${theme.text}`}>
               {profile.name?.[0]?.toUpperCase() ?? username[0].toUpperCase()}
             </span>
           )}
         </div>
-        <h1 className="text-lg font-bold">{profile.name || username}</h1>
+        <h1 className={`text-lg font-bold ${theme.text}`}>{profile.name || username}</h1>
         {profile.bio && (
-          <p className="text-sm text-muted-foreground mt-1 text-center max-w-xs">{profile.bio}</p>
+          <p className={`text-sm ${theme.subtext} mt-1 text-center max-w-xs`}>{profile.bio}</p>
         )}
       </div>
 
       {/* Links */}
       <div className="w-full max-w-sm space-y-3">
         {links.length === 0 ? (
-          <p className="text-sm text-center text-muted-foreground">No links yet.</p>
+          <p className={`text-sm text-center ${theme.subtext}`}>No links yet.</p>
         ) : (
           links.map((link) => (
             <a
@@ -68,7 +67,7 @@ export default async function ProfilePage({ params }: Props) {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full text-center py-3 px-6 bg-white border rounded-xl text-sm font-medium hover:bg-zinc-50 transition-colors shadow-sm"
+              className={`block w-full text-center py-3 px-6 rounded-xl text-sm font-medium transition-colors shadow-sm ${theme.button}`}
             >
               {link.title}
             </a>
@@ -77,9 +76,8 @@ export default async function ProfilePage({ params }: Props) {
       </div>
 
       {/* Footer */}
-      <p className="mt-12 text-xs text-muted-foreground">
-        made with <span className="font-semibold">
-          <a href="/" > linkita</a>  </span>
+      <p className={`mt-12 text-xs ${theme.subtext}`}>
+        made with <span className="font-semibold">linkita</span>
       </p>
     </div>
   )

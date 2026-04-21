@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { themes, ThemeKey } from '@/lib/themes'
 
 interface Link {
   id: number
@@ -32,6 +33,8 @@ export default function DashboardPage() {
   const [profile, setProfile] = useState<Profile>({ name: '', bio: '', avatar_url: '', username: '', email: '' })
   const [savingProfile, setSavingProfile] = useState(false)
   const [profileSaved, setProfileSaved] = useState(false)
+
+  const [selectedTheme, setSelectedTheme] = useState<ThemeKey>('default')
 
   useEffect(() => {
     fetchLinks()
@@ -91,7 +94,24 @@ export default function DashboardPage() {
   async function fetchProfile() {
     const res = await fetch('/api/profile')
     const data = await res.json()
-    if (data.profile) setProfile(data.profile)
+    if (data.profile) {
+      setProfile(data.profile)
+      setSelectedTheme(data.profile.theme ?? 'default')
+    }
+  }
+
+  async function handleThemeChange(theme: ThemeKey) {
+    setSelectedTheme(theme)
+    await fetch('/api/profile', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: profile.name,
+        bio: profile.bio,
+        avatar_url: profile.avatar_url,
+        theme
+      })
+    })
   }
 
   async function handleSaveProfile(e: React.FormEvent) {
@@ -291,11 +311,35 @@ export default function DashboardPage() {
               </form>
             </div>
 
+            {/* Theme Selector */}
+            <div className="bg-white rounded-xl border p-6">
+              <h2 className="text-sm font-semibold mb-4">Page theme</h2>
+              <div className="grid grid-cols-5 gap-3">
+                {(Object.keys(themes) as ThemeKey[]).map((key) => (
+                  <button
+                    key={key}
+                    onClick={() => handleThemeChange(key)}
+                    className={`relative rounded-xl p-3 border-2 transition-all ${selectedTheme === key
+                      ? 'border-black scale-105'
+                      : 'border-transparent hover:border-zinc-200'
+                      }`}
+                  >
+                    <div className={`w-full h-12 rounded-lg ${themes[key].bg} border border-zinc-100 mb-2`} />
+                    <p className="text-xs text-center font-medium">{themes[key].name}</p>
+                    {selectedTheme === key && (
+                      <div className="absolute top-1 right-1 w-3 h-3 bg-black rounded-full" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Preview */}
             <div className="bg-white rounded-xl border p-6">
               <h2 className="text-sm font-semibold mb-4">Preview</h2>
-              <div className="flex flex-col items-center py-6">
-                <div className="w-16 h-16 rounded-full bg-zinc-200 flex items-center justify-center mb-3">
+              <div className={`rounded-xl p-6 flex flex-col items-center ${themes[selectedTheme].bg}`}>
+                {/* Avatar */}
+                <div className={`w-16 h-16 rounded-full ${themes[selectedTheme].avatar} flex items-center justify-center mb-3`}>
                   {profile.avatar_url ? (
                     <img
                       src={profile.avatar_url}
@@ -303,19 +347,50 @@ export default function DashboardPage() {
                       className="w-16 h-16 rounded-full object-cover"
                     />
                   ) : (
-                    <span className="text-xl font-bold text-zinc-500">
+                    <span className={`text-xl font-bold ${themes[selectedTheme].text}`}>
                       {profile.name?.[0]?.toUpperCase() ?? '?'}
                     </span>
                   )}
                 </div>
-                <p className="font-semibold text-sm">{profile.name || 'Your name'}</p>
+
+                {/* Name & Bio */}
+                <p className={`font-semibold text-sm ${themes[selectedTheme].text}`}>
+                  {profile.name || 'Your name'}
+                </p>
                 {profile.bio && (
-                  <p className="text-xs text-muted-foreground mt-1 text-center max-w-xs">{profile.bio}</p>
+                  <p className={`text-xs ${themes[selectedTheme].subtext} mt-1 text-center max-w-xs`}>
+                    {profile.bio}
+                  </p>
                 )}
+
+                {/* Links */}
+                <div className="w-full max-w-xs space-y-2 mt-4">
+                  {links.length === 0 ? (
+                    <p className={`text-xs text-center ${themes[selectedTheme].subtext}`}>
+                      No links yet
+                    </p>
+                  ) : (
+                    links.map((link) => (
+                      <div
+                        key={link.id}
+                        className={`w-full text-center py-2 px-4 rounded-xl text-xs font-medium ${themes[selectedTheme].button}`}
+                      >
+                        {link.title}
+                      </div>
+                    ))
+                  )}
+                </div>
+
+                {/* Footer */}
+                <p className={`mt-4 text-xs ${themes[selectedTheme].subtext}`}>
+                  made with <span className="font-semibold">linkita</span>
+                </p>
+
+                {/* Link pra página pública */}
                 <a
                   href={`/u/${profile.username}`}
                   target="_blank"
-                  className="mt-4 text-xs text-muted-foreground hover:text-black transition-colors underline"
+                  className={`mt-3 text-xs underline underline-offset-2 transition-colors ${themes[selectedTheme].subtext} hover:${themes[selectedTheme].text}`}
                 >
                   View public page →
                 </a>
