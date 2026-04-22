@@ -38,6 +38,7 @@
     "login": "Entrar"
   },
   "dashboard": {
+    "copyLink": "Copiar seu link",
     "logout": "Sair",
     "tabs": {
       "links": "Links",

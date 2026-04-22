@@ -38,6 +38,7 @@
     "login": "Log in"
   },
   "dashboard": {
+    "copyLink": "Copy your link",
     "logout": "Log out",
     "tabs": {
       "links": "Links",

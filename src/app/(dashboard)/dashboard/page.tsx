@@ -182,6 +182,20 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-zinc-50">
       <header className="bg-white border-b px-8 py-4 flex items-center justify-between">
         <a href="/" className="text-xl font-bold hover:opacity-70 transition-opacity">linkita</a>
+
+        {profile.username && (
+          <button
+            onClick={() => {
+              const url = `${window.location.origin}/u/${profile.username}`
+              navigator.clipboard.writeText(url)
+              alert('Link copied!')
+            }}
+            className="text-sm text-muted-foreground hover:text-black transition-colors"
+          >
+            📋 {t('dashboard.copyLink')}
+          </button>
+        )}
+
         <button onClick={handleLogout} className="text-sm text-muted-foreground hover:text-black transition-colors">
           {t('dashboard.logout')}
         </button>
