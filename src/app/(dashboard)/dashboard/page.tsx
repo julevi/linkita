@@ -36,6 +36,7 @@ export default function DashboardPage() {
   const [selectedTheme, setSelectedTheme] = useState<ThemeKey>('default')
   const [uploadingPhoto, setUploadingPhoto] = useState(false)
   const { t } = useLocale()
+  
 
   useEffect(() => {
     fetchLinks()
@@ -180,8 +181,8 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      <header className="bg-white border-b px-8 py-4 flex items-center justify-between">
-        <a href="/" className="text-xl font-bold hover:opacity-70 transition-opacity">linkita</a>
+      <header className="bg-petroleum-blue border-b px-8 py-4 flex items-center justify-between">
+        <a href="/" className="text-xl text-white font-bold hover:opacity-70 transition-opacity">linkita</a>
 
         {profile.username && (
           <button
@@ -190,13 +191,13 @@ export default function DashboardPage() {
               navigator.clipboard.writeText(url)
               alert('Link copied!')
             }}
-            className="text-sm text-muted-foreground hover:text-black transition-colors"
+            className="text-sm cursor-pointer text-muted-foreground hover:text-black text-white transition-colors"
           >
-            📋 {t('dashboard.copyLink')}
+           {t('dashboard.copyLink')}
           </button>
         )}
 
-        <button onClick={handleLogout} className="text-sm text-muted-foreground hover:text-black transition-colors">
+        <button onClick={handleLogout} className="cursor-pointer text-sm text-muted-foreground hover:text-black text-white transition-colors">
           {t('dashboard.logout')}
         </button>
       </header>
@@ -227,7 +228,7 @@ export default function DashboardPage() {
                   <Label htmlFor="url">{t('dashboard.links.urlLabel')}</Label>
                   <Input id="url" placeholder="https://..." value={url} onChange={(e) => setUrl(e.target.value)} required />
                 </div>
-                <Button type="submit" disabled={adding}>
+                <Button className='bg-petroleum-blue hover:bg-petroleum-blue/90' type="submit" disabled={adding}>
                   {adding ? t('dashboard.links.adding') : t('dashboard.links.addButton')}
                 </Button>
               </form>
@@ -248,7 +249,7 @@ export default function DashboardPage() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleToggle(link)}
-                        className={`text-xs px-3 py-1 rounded-full border transition-colors ${link.is_active ? 'bg-black text-white border-black' : 'text-muted-foreground border-zinc-200'}`}
+                        className={`text-xs px-3 py-1 cursor-pointer rounded-full border transition-colors ${link.is_active ? 'bg-petroleum-blue hover:bg-petroleum-blue/90 text-white border-black' : 'text-muted-foreground border-zinc-200'}`}
                       >
                         {link.is_active ? t('dashboard.links.active') : t('dashboard.links.inactive')}
                       </button>
@@ -278,7 +279,7 @@ export default function DashboardPage() {
                       )}
                     </div>
                     <div className="flex gap-2">
-                      <label className="cursor-pointer inline-flex items-center justify-center text-xs bg-black text-white px-3 py-2 rounded-lg hover:bg-zinc-800 transition-colors">
+                      <label className="cursor-pointer inline-flex items-center justify-center text-xs bg-petroleum-blue hover:bg-petroleum-blue/90 text-white px-3 py-2 rounded-2xl transition-colors">
                         {uploadingPhoto ? t('dashboard.appearance.uploading') : t('dashboard.appearance.upload')}
                         <input type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} disabled={uploadingPhoto} />
                       </label>
@@ -305,7 +306,7 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="flex flex-col justify-end">
-                  <Button type="submit" disabled={savingProfile}>
+                  <Button className='bg-petroleum-blue hover:bg-petroleum-blue/90' type="submit" disabled={savingProfile}>
                     {savingProfile ? t('dashboard.appearance.saving') : t('dashboard.appearance.save')}
                   </Button>
                   {profileSaved && <p className="text-sm py-2 text-green-500">{t('dashboard.appearance.saved')}</p>}
@@ -422,7 +423,7 @@ export default function DashboardPage() {
                   </Label>
                   <Input id="newPassword" name="newPassword" type="password" placeholder="••••••••" />
                 </div>
-                <Button type="submit">{t('dashboard.settings.save')}</Button>
+                <Button className='bg-petroleum-blue hover:bg-petroleum-blue/90' type="submit">{t('dashboard.settings.save')}</Button>
               </form>
             </div>
           </div>

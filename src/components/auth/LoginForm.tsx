@@ -40,8 +40,8 @@ export default function LoginForm({ t }: Props) {
   }
 
   return (
-    <div className="min-h-screen md:grid grid-cols-2">
-      <div className="flex flex-col justify-center items-center min-h-screen md:min-h-0 px-8 md:px-16 w-full">
+    <div className="h-screen md:grid grid-cols-2 overflow-hidden">
+      <div className="flex flex-col justify-center items-center h-full px-8 md:px-16">
         <div className="w-full max-w-sm">
           <div className="mb-10">
             <a href="/" className="text-xl font-bold hover:opacity-70 transition-opacity">linkita</a>
@@ -79,7 +79,7 @@ export default function LoginForm({ t }: Props) {
               <p className="text-sm text-red-500">{error}</p>
             )}
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full bg-petroleum-blue hover:bg-petroleum-blue/90" disabled={loading}>
               {loading ? t.loading : t.submit}
             </Button>
           </form>
@@ -94,8 +94,12 @@ export default function LoginForm({ t }: Props) {
       </div>
 
       {/* Right side */}
-      <div className="hidden md:flex bg-zinc-900 items-center justify-center">
-        <p className="text-white text-4xl font-bold tracking-tight">linkita.</p>
+      <div className="hidden md:flex overflow-hidden">
+        <img
+          src="https://res.cloudinary.com/dgp4qg7o8/image/upload/v1777027303/pexels-maksgelatin-5506093_acf851.jpg"
+          alt="Linkita"
+          className="w-full h-full object-cover"
+        />
       </div>
     </div>
   )

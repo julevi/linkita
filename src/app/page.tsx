@@ -24,14 +24,14 @@ export default async function Home() {
 
       {/* Header */}
       <header className="relative z-20 px-8 py-5 flex items-center justify-between">
-        <a href="/" className="text-xl font-bold hover:opacity-70 transition-opacity text-white">linkita</a>
+        <a href="/" className="text-xl font-bold hover:opacity-70 text-white transition-opacity">linkita</a>
         
         <div className="flex items-center gap-4">
           <LanguageSwitcher currentLocale={locale} />
           <Link href="/login" className="text-sm text-white/80 hover:text-white transition-colors">
             {t('nav.login')}
           </Link>
-          <Link href="/register" className="text-sm bg-white text-black px-4 py-2 rounded-lg hover:bg-zinc-100 transition-colors">
+          <Link href="/register" className="text-sm bg-petroleum-blue text-white px-4 py-2 rounded-3xl hover:bg-zinc-100 hover:text-black transition-colors">
             {t('nav.getStarted')}
           </Link>
         </div>
@@ -49,7 +49,7 @@ export default async function Home() {
           {t('hero.description')}
         </p>
         <div className="flex items-center gap-3">
-          <Link href="/register" className="bg-white text-black px-6 py-3 rounded-lg text-sm font-medium hover:bg-zinc-100 transition-colors">
+          <Link href="/register" className="bg-petroleum-blue text-white px-6 py-3 rounded-3xl text-sm font-medium hover:bg-zinc-100 hover:text-black transition-colors">
             {t('hero.cta')}
           </Link>
           <Link href="/login" className="text-sm text-white/70 hover:text-white transition-colors">
