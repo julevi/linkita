@@ -73,7 +73,7 @@ export default function RegisterForm({ t }: Props) {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="name">{t.name}</Label>
-              <Input id="name" type="text" placeholder="Juliana Prado" value={name} onChange={(e) => setName(e.target.value)} required />
+              <Input id="name" type="text" placeholder="your name" value={name} onChange={(e) => setName(e.target.value)} required />
             </div>
 
             <div className="space-y-2">
@@ -83,7 +83,7 @@ export default function RegisterForm({ t }: Props) {
 
             <div className="space-y-2">
               <Label htmlFor="username">{t.username}</Label>
-              <Input id="username" type="text" placeholder="juliana" value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} required />
+              <Input id="username" type="text" placeholder="your username" value={username} onChange={(e) => setUsername(e.target.value.toLowerCase())} required />
               <p className="text-xs text-muted-foreground">{t.usernameHint}</p>
             </div>
 
