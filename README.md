@@ -1,19 +1,26 @@
+<p align="center">
+  <a href="./README.md">🇺🇸 English</a> •
+  <a href="./README.pt-BR.md">🇧🇷 Português</a>
+</p>
+
+---
+
 # 🚀 Linkita
 
-Linkita é uma plataforma para criação de páginas personalizadas de links. Um "link na bio" moderno onde usuários podem centralizar e compartilhar todos os seus links em uma única página.
+Linkita is a platform for creating personalized link-in-bio pages where users can centralize and share all their links in one place.
 
 ---
 
 ## ✨ Features
 
-- 🔐 Autenticação segura com JWT
-- 🌍 Suporte multilíngue (i18n)
-- 🎨 Interface moderna e responsiva
-- 🖼️ Upload e otimização de imagens
-- 🔗 Gerenciamento de links personalizados
-- 📊 Rastreamento de visualizações
-- ⚡ Alta performance com Next.js
-- 🛡️ Proteção contra ataques
+- 🔐 Secure authentication with JWT
+- 🌍 Multi-language support (i18n)
+- 🎨 Modern UI with Tailwind + shadcn/ui
+- 🖼️ Image upload and optimization
+- 🔗 Custom link management
+- 📊 Page view tracking
+- ⚡ High performance with Next.js
+- 🛡️ Built-in security protections
 
 ---
 
@@ -30,11 +37,11 @@ Linkita é uma plataforma para criação de páginas personalizadas de links. Um
 ### Backend
 - Next.js Route Handlers
 - PostgreSQL
-- JWT
+- JWT (jsonwebtoken)
 - bcryptjs
 - Zod
 
-### Infraestrutura
+### Infrastructure
 - Vercel
 - Railway
 - Upstash Redis
@@ -42,17 +49,17 @@ Linkita é uma plataforma para criação de páginas personalizadas de links. Um
 
 ---
 
-## 🔐 Segurança
+## 🔐 Security
 
-- Hash de senhas com bcrypt
-- JWT em cookies httpOnly
-- Rate limiting
-- Queries parametrizadas
-- Proteção de rotas via middleware
+- Password hashing with bcrypt
+- JWT stored in httpOnly cookies
+- Rate limiting (5 attempts / 15 min per IP)
+- Parameterized queries (SQL Injection protection)
+- Route protection via middleware
 
 ---
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
 ```bash
 app/
@@ -75,35 +82,33 @@ messages/
 
 ---
 
-## 🔄 Arquitetura
+## 🔄 Architecture
 
 ```text
-Usuário
-   ↓
+User
+ ↓
 Vercel (Next.js)
-   ↓
-Route Handlers
-   ↓
+ ↓
+Route Handlers (API)
+ ↓
 PostgreSQL (Railway)
-   ↓
+ ↓
 Redis (Upstash)
-   ↓
+ ↓
 Cloudinary
 ```
 
 ---
 
-## 🌍 Internacionalização
+## 🌍 Internationalization
 
-O projeto utiliza **next-intl** para suporte multilíngue.
+This project uses **next-intl** for multi-language support.
 
-Funcionalidades:
+- JSON-based translations
+- Automatic language detection
+- Cookie-based persistence
 
-- Traduções via JSON
-- Detecção automática de idioma
-- Persistência por cookie
-
-Exemplo:
+Example:
 
 ```ts
 t('nav.login')
@@ -111,9 +116,9 @@ t('nav.login')
 
 ---
 
-## ⚙️ Variáveis de Ambiente
+## ⚙️ Environment Variables
 
-Crie um arquivo `.env.local`:
+Create a `.env.local` file:
 
 ```env
 DATABASE_URL=
@@ -129,80 +134,60 @@ UPSTASH_REDIS_REST_TOKEN=
 
 ---
 
-## ▶️ Rodando Localmente
-
-Clone o projeto:
+## ▶️ Running Locally
 
 ```bash
-git clone https://github.com/seuusuario/linkita.git
-```
-
-Entre na pasta:
-
-```bash
+git clone https://github.com/yourusername/linkita.git
 cd linkita
-```
-
-Instale as dependências:
-
-```bash
 npm install
-```
-
-Inicie o servidor:
-
-```bash
 npm run dev
 ```
 
-Acesse:
+Open:
 
-```bash
+```
 http://localhost:3000
 ```
 
 ---
 
-## 🚀 Deploy
+## 🚀 Deployment
 
-Deploy automático com **Vercel**
-
-Cada push na branch principal gera uma nova versão em produção.
+Automatic deployment via **Vercel** on every push.
 
 ---
 
-## 📌 Conceitos Aplicados
+## 📌 Concepts Applied
 
-- Server Components
-- Client Components
+- Server & Client Components
 - Route Groups
-- Rotas dinâmicas
+- Dynamic Routing
 - REST API
 - JWT Authentication
 - Middleware
 - i18n
-- Upload de mídia
+- Media upload
 - Rate limiting
 
 ---
 
-## 🧪 Próximos Passos
+## 🧪 Next Steps
 
-- [ ] Testes automatizados
+- [ ] Testing (Jest + RTL + Supertest)
 - [ ] Docker
 - [ ] Prisma ORM
-- [ ] Melhorias de acessibilidade
-- [ ] Otimizações avançadas de performance
+- [ ] Accessibility improvements
+- [ ] Performance optimizations
 
 ---
 
-## 💡 Sobre
+## 💡 About
 
-O Linkita foi desenvolvido como um projeto full stack real, aplicando arquitetura moderna, autenticação segura, internacionalização e deploy em produção.
+Linkita is a real-world full stack project focused on modern architecture, security, and scalability.
 
 ---
 
-## 👩‍💻 Desenvolvido por
+## 👩‍💻 Author
 
 **Juliana Prado**
 
