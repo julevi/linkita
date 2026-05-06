@@ -1,36 +1,209 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Linkita
 
-## Getting Started
+Linkita é uma plataforma para criação de páginas personalizadas de links. Um "link na bio" moderno onde usuários podem centralizar e compartilhar todos os seus links em uma única página.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- 🔐 Autenticação segura com JWT
+- 🌍 Suporte multilíngue (i18n)
+- 🎨 Interface moderna e responsiva
+- 🖼️ Upload e otimização de imagens
+- 🔗 Gerenciamento de links personalizados
+- 📊 Rastreamento de visualizações
+- ⚡ Alta performance com Next.js
+- 🛡️ Proteção contra ataques
+
+---
+
+## 🧱 Tech Stack
+
+### Frontend
+- Next.js 16 (App Router)
+- React
+- TypeScript
+- Tailwind CSS v4
+- shadcn/ui
+- next-intl
+
+### Backend
+- Next.js Route Handlers
+- PostgreSQL
+- JWT
+- bcryptjs
+- Zod
+
+### Infraestrutura
+- Vercel
+- Railway
+- Upstash Redis
+- Cloudinary
+
+---
+
+## 🔐 Segurança
+
+- Hash de senhas com bcrypt
+- JWT em cookies httpOnly
+- Rate limiting
+- Queries parametrizadas
+- Proteção de rotas via middleware
+
+---
+
+## 📁 Estrutura do Projeto
+
+```bash
+app/
+├── (auth)/
+├── (dashboard)/
+├── api/
+│   ├── auth/
+│   ├── users/
+│   ├── links/
+│   └── upload/
+└── u/
+    └── [username]/
+
+components/
+lib/
+hooks/
+types/
+messages/
+```
+
+---
+
+## 🔄 Arquitetura
+
+```text
+Usuário
+   ↓
+Vercel (Next.js)
+   ↓
+Route Handlers
+   ↓
+PostgreSQL (Railway)
+   ↓
+Redis (Upstash)
+   ↓
+Cloudinary
+```
+
+---
+
+## 🌍 Internacionalização
+
+O projeto utiliza **next-intl** para suporte multilíngue.
+
+Funcionalidades:
+
+- Traduções via JSON
+- Detecção automática de idioma
+- Persistência por cookie
+
+Exemplo:
+
+```ts
+t('nav.login')
+```
+
+---
+
+## ⚙️ Variáveis de Ambiente
+
+Crie um arquivo `.env.local`:
+
+```env
+DATABASE_URL=
+JWT_SECRET=
+
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+```
+
+---
+
+## ▶️ Rodando Localmente
+
+Clone o projeto:
+
+```bash
+git clone https://github.com/seuusuario/linkita.git
+```
+
+Entre na pasta:
+
+```bash
+cd linkita
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Inicie o servidor:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🚀 Deploy
 
-To learn more about Next.js, take a look at the following resources:
+Deploy automático com **Vercel**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Cada push na branch principal gera uma nova versão em produção.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📌 Conceitos Aplicados
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Server Components
+- Client Components
+- Route Groups
+- Rotas dinâmicas
+- REST API
+- JWT Authentication
+- Middleware
+- i18n
+- Upload de mídia
+- Rate limiting
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🧪 Próximos Passos
+
+- [ ] Testes automatizados
+- [ ] Docker
+- [ ] Prisma ORM
+- [ ] Melhorias de acessibilidade
+- [ ] Otimizações avançadas de performance
+
+---
+
+## 💡 Sobre
+
+O Linkita foi desenvolvido como um projeto full stack real, aplicando arquitetura moderna, autenticação segura, internacionalização e deploy em produção.
+
+---
+
+## 👩‍💻 Desenvolvido por
+
+**Juliana Prado**
+
+[Portfolio](https://julianaprado.dev)
