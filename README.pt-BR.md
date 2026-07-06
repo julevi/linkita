@@ -1,194 +1,113 @@
-<p align="center">
-  <a href="./README.md">🇺🇸 English</a> •
-  <a href="./README.pt-BR.md">🇧🇷 Português</a>
-</p>
 
+
+Readme linkita · MD
+# Linkita
+ 
+Plataforma de link-in-bio onde usuários criam uma página pública para centralizar todos os seus links — perfil, redes sociais, projetos — em um único lugar.
+ 
+**Demo ao vivo:** [linkita-drab.vercel.app](https://linkita-drab.vercel.app)
+ 
 ---
-
-# 🚀 Linkita
-
-Linkita é uma plataforma para criação de páginas personalizadas de links (link na bio), permitindo centralizar e compartilhar vários links em um único lugar.
-
+ 
+## Por que esse projeto
+ 
+Linkita foi construído para praticar arquitetura full-stack real com Next.js: autenticação segura do zero (sem depender de um provedor pronto), upload de mídia, internacionalização e rate limiting — as partes de um sistema que normalmente ficam escondidas atrás de bibliotecas prontas, aqui implementadas manualmente para entender o que está acontecendo por baixo.
+ 
 ---
-
-## ✨ Funcionalidades
-
-- 🔐 Autenticação segura com JWT
-- 🌍 Suporte a múltiplos idiomas (i18n)
-- 🎨 Interface moderna com Tailwind + shadcn/ui
-- 🖼️ Upload e otimização de imagens
-- 🔗 Gerenciamento de links personalizados
-- 📊 Rastreamento de visualizações
-- ⚡ Alta performance com Next.js
-- 🛡️ Proteções de segurança integradas
-
+ 
+## Stack
+ 
+| Camada | Tecnologias |
+|---|---|
+| Frontend | Next.js 16 (App Router), React, TypeScript, Tailwind CSS v4, shadcn/ui, next-intl |
+| Backend | Next.js Route Handlers, PostgreSQL, JWT (jsonwebtoken), bcryptjs, Zod |
+| Infra | Vercel, Railway, Upstash Redis, Cloudinary |
+ 
 ---
-
-## 🧱 Tecnologias
-
-### Frontend
-- Next.js 16 (App Router)
-- React
-- TypeScript
-- Tailwind CSS v4
-- shadcn/ui
-- next-intl
-
-### Backend
-- Next.js Route Handlers
-- PostgreSQL
-- JWT (jsonwebtoken)
-- bcryptjs
-- Zod
-
-### Infraestrutura
-- Vercel
-- Railway
-- Upstash Redis
-- Cloudinary
-
----
-
-## 🔐 Segurança
-
-- Senhas criptografadas com bcrypt
-- JWT armazenado em cookies httpOnly
-- Rate limiting (5 tentativas / 15 minutos por IP)
+ 
+## Funcionalidades
+ 
+- Autenticação com JWT armazenado em cookie httpOnly
+- Suporte multi-idioma (i18n) com detecção automática
+- Upload e otimização de imagem via Cloudinary
+- Gerenciamento de links customizados
+- Rastreamento de visualizações de página
+- Rate limiting (5 tentativas / 15 min por IP) contra brute-force no login
 - Queries parametrizadas (proteção contra SQL Injection)
 - Proteção de rotas via middleware
-
 ---
-
-## 📁 Estrutura do Projeto
-
-```bash
+ 
+## Arquitetura
+ 
+```
+Usuário → Vercel (Next.js) → Route Handlers (API) → PostgreSQL (Railway)
+                                                    → Redis (Upstash) — rate limiting
+                                                    → Cloudinary — mídia
+```
+ 
+```
 app/
-├── (auth)/
-├── (dashboard)/
+├── (auth)/          # páginas de login e registro
+├── (dashboard)/      # área logada do usuário
 ├── api/
-│   ├── auth/
+│   ├── auth/          # login, registro, sessão
 │   ├── users/
 │   ├── links/
 │   └── upload/
-└── u/
-    └── [username]/
-
+└── u/[username]/     # página pública do perfil
+ 
 components/
 lib/
 hooks/
 types/
-messages/
+messages/            # arquivos de tradução
 ```
-
+ 
 ---
-
-## 🔄 Arquitetura
-
-```text
-Usuário
- ↓
-Vercel (Next.js)
- ↓
-Route Handlers (API)
- ↓
-PostgreSQL (Railway)
- ↓
-Redis (Upstash)
- ↓
-Cloudinary
-```
-
----
-
-## 🌍 Internacionalização
-
-O projeto utiliza **next-intl** para suporte multilíngue.
-
-- Traduções em JSON
-- Detecção automática de idioma
-- Persistência via cookie
-
-Exemplo:
-
-```ts
-t('nav.login')
-```
-
----
-
-## ⚙️ Variáveis de Ambiente
-
-Crie um arquivo `.env.local`:
-
-```env
-DATABASE_URL=
-JWT_SECRET=
-
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
-
-UPSTASH_REDIS_REST_URL=
-UPSTASH_REDIS_REST_TOKEN=
-```
-
----
-
-## ▶️ Rodando Localmente
-
+ 
+## Rodando localmente
+ 
 ```bash
-git clone https://github.com/seuusuario/linkita.git
+git clone https://github.com/julevi/linkita.git
 cd linkita
 npm install
 npm run dev
 ```
-
-Acesse:
-
+ 
+Crie um `.env.local` na raiz:
+ 
 ```
-http://localhost:3000
+DATABASE_URL=
+JWT_SECRET=
+ 
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+ 
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
 ```
-
+ 
+Acesse em `http://localhost:3000`.
+ 
+Deploy automático via Vercel a cada push na `main`.
+ 
 ---
-
-## 🚀 Deploy
-
-Deploy automático via **Vercel** a cada push.
-
+ 
+## Status do projeto
+ 
+Em desenvolvimento ativo. Funcional e com deploy no ar, mas ainda sem suite de testes automatizados — próximo passo prioritário.
+ 
+**Roadmap:**
+- [ ] Testes (Jest + React Testing Library + Supertest)
+- [ ] Containerização com Docker
+- [ ] Migração para Prisma ORM
+- [ ] Melhorias de acessibilidade
+- [ ] Otimizações de performance
 ---
+ 
+## Autora
+ 
+**Juliana Prado** — [Portfólio](https://julianaprado.dev)
+ 
 
-## 📌 Conceitos Aplicados
-
-- Server e Client Components
-- Route Groups
-- Rotas dinâmicas
-- REST API
-- Autenticação com JWT
-- Middleware
-- i18n
-- Upload de mídia
-- Rate limiting
-
----
-
-## 🧪 Próximos Passos
-
-- [ ] Testes automatizados
-- [ ] Docker
-- [ ] Prisma ORM
-- [ ] Acessibilidade
-- [ ] Otimização de performance
-
----
-
-## 💡 Sobre
-
-Linkita é um projeto full stack real focado em arquitetura moderna, segurança e escalabilidade.
-
----
-
-## 👩‍💻 Autora
-
-**Juliana Prado**
-
-[Portfolio](https://julianaprado.dev)
