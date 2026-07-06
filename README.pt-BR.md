@@ -1,6 +1,8 @@
+<p align="center">
+  <a href="./README.md">🇺🇸 English</a> •
+  <a href="./README.pt-BR.md">🇧🇷 Português</a>
+</p>
 
-
-Readme linkita · MD
 # Linkita
  
 Plataforma de link-in-bio onde usuários criam uma página pública para centralizar todos os seus links — perfil, redes sociais, projetos — em um único lugar.
